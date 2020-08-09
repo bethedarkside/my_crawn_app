@@ -21,26 +21,24 @@ function SignUpComponent() {
       [name]: value,
     }));
   };
-
+  const { displayName, email, password, confirmPassword } = user;
   const hanldeSubmit = async (event) => {
     event.preventDefault();
-    let { displayName, email, password, confirmPassword } = user;
     if (password !== confirmPassword) {
       alert("Passwords didn't match");
       return;
     }
     try {
-      const { authUser } = await auth.createUserWithEmailAndPassword(
+      const { user } = await auth.createUserWithEmailAndPassword(
         email,
         password
       );
-      await createUserProfile(authUser, { displayName });
+      await createUserProfile(user, { displayName: displayName });
       setUser(initialState);
     } catch (error) {
       console.log(error);
     }
   };
-  const { displayName, email, password, confirmPassword } = user;
   return (
     <div className="sign-up">
       <h1 className="title">Sign Up</h1>

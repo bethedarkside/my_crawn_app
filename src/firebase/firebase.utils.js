@@ -28,10 +28,10 @@ export const createUserProfile = async (userAuth, additionalData) => {
     const createdAt = new Date();
     try {
       userRef.set({
-        ...additionalData,
         displayName,
         email,
         createdAt,
+        ...additionalData,
       });
     } catch (error) {
       console.log(`errro while adding User: ${error.message}`);
